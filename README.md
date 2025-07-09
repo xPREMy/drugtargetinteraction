@@ -1,125 +1,91 @@
-# drugtargetinteraction
-Here is a draft README file for your "Drug-Target Interaction Prediction using GIN and CNN" project, incorporating details from your PDF document and the libraries identified from your Jupyter Notebook.
+# Drug-Target Interaction Prediction using GIN and CNN
 
-Drug-Target Interaction Prediction using GIN and CNN
-Table of Contents
-Project Overview
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Problem Statement](#problem-statement)
+- [Methodology](#methodology)
+- [Dataset](#dataset)
+- [Results](#results)
+- [Key Technologies and Libraries](#key-technologies-and-libraries)
+- [Files in this Repository](#files-in-this-repository)
+- [How to Run (Usage)](#how-to-run-usage)
+- [Future Work](#future-work)
+- [Contact](#contact)
 
-Problem Statement
+---
 
-Methodology
+## Project Overview
+This project presents a deep learning-based system designed to predict drug–target interactions by estimating the binding affinity (K<sub>d</sub>) between drug molecules and proteins. We integrate a **Graph Isomorphism Network (GIN)** for molecular graph encoding and a **Convolutional Neural Network (CNN)** for protein sequence embedding. The model aims to accelerate early-stage drug discovery by identifying promising drug candidates more efficiently.
 
-Dataset
+---
 
-Results
+## Problem Statement
+A major bottleneck in drug development is identifying how strongly a drug molecule binds to a target protein. The **dissociation constant (K<sub>d</sub>)** quantifies this binding; lower values indicate stronger interactions. Accurately predicting K<sub>d</sub> values allows researchers to eliminate weak binders early, reducing experimental costs and speeding up drug screening.
 
-Key Technologies and Libraries
+---
 
-Files in this Repository
+## Methodology
 
-How to Run (Usage)
+### 🔹 1. Graph Isomorphism Network (GIN)
+- Converts drug SMILES into molecular graphs using RDKit.
+- GIN is used to extract structural features due to its superior expressiveness over GCN/GAT.
 
-Future Work
+### 🔹 2. Convolutional Neural Network (CNN)
+- Encodes the protein sequences into meaningful embeddings.
+- Captures local patterns and motifs in amino acid sequences.
 
-Contact
+### 🔹 3. Feature Fusion & Prediction
+- Drug and protein embeddings are concatenated.
+- Fully connected layers are used to predict binding affinity.
 
-Project Overview
-This project presents a deep learning model designed to accurately predict drug-target interactions, specifically focusing on the binding affinity between drug molecules and target proteins. By integrating Graph Isomorphism Networks (GIN) and Convolutional Neural Networks (CNN), this model aims to enhance the efficiency of early-stage drug discovery by identifying potent drug candidates.
+---
 
-Problem Statement
-A critical challenge in drug discovery is precisely determining how strongly a drug molecule binds to its target protein. The dissociation constant (K_d) is a key indicator of this binding strength; a lower K_d signifies stronger binding. Accurate prediction of K_d is essential for identifying effective drug candidates and eliminating weak binders early in the drug discovery pipeline, thereby accelerating the overall process.
+## Dataset
+We used the **DAVIS dataset**, a benchmark dataset for drug-target binding prediction containing:
+- Drug-protein pairs
+- Binding affinities (K<sub>d</sub>) as regression targets
 
-Methodology
-Our model employs a hybrid deep learning architecture:
+---
 
-Graph Isomorphism Network (GIN): Utilized to encode the structural information of drug molecules. Molecular graphs are generated from SMILES representations, and GIN processes these graphs, leveraging its superior ability to distinguish different graph structures compared to other Graph Neural Network (GNN) models like GCN and GAT.
+## Results
 
-Convolutional Neural Network (CNN): Used to process the sequential information of target proteins.
+| Metric              | Value     |
+|---------------------|-----------|
+| Training Accuracy   | 88.8%     |
+| Test Accuracy       | 87.8%     |
+| RMSE (Test)         | *Add Here* |
+| MAE (Test)          | *Add Here* |
+| Pearson Correlation | *Add Here* |
 
-Feature Concatenation: Features extracted from both the GIN (molecular graph embeddings) and the CNN (protein sequence embeddings) are concatenated.
+> ⚠️ *Note: Accuracy is only meaningful if K<sub>d</sub> is binned into classes. Please include regression metrics if you're treating K<sub>d</sub> as continuous.*
 
-Prediction Layer: The combined features are then fed into a fully connected layer to predict the binding affinity (K_d).
+---
 
-Dataset
-The model was trained and evaluated using the DAVIS dataset, a widely recognized benchmark for drug-target interaction prediction.
+## Key Technologies and Libraries
 
-Results
-The model demonstrated robust performance on both training and testing splits:
+- **Python 3.x**
+- **PyTorch**, **torch_geometric** – GIN implementation
+- **RDKit** – SMILES parsing and molecule graph generation
+- **PyTDC** – Dataset access and bioinformatics tools
+- **NumPy**, **Pandas** – Data processing
+- **Matplotlib**, **Seaborn** – Visualization
+- **Scikit-learn** – Metrics and preprocessing
 
-Training Set Accuracy: 88.8%
+---
 
-Test Set Accuracy: 87.8%
+## Files in this Repository
 
-These results indicate the model's effectiveness in accurately predicting drug-target binding affinities.
+- `DrugTargetInteraction.ipynb` – Main notebook with full training pipeline
+- `document_17.pdf` – Report explaining architecture, results, and dataset
+- `requirements.txt` – Python dependencies *(recommended to add if missing)*
+- `data/` – Contains dataset files (optional)
+- `models/` – Trained model weights (optional)
 
-Key Technologies and Libraries
-Python 3
+---
 
-PyTorch (or TensorFlow, if used in your implementation)
+## How to Run (Usage)
 
-torch_geometric: For implementing Graph Isomorphism Networks (GIN) and handling graph-structured data.
-
-PyTDC: Likely used for accessing and processing the DAVIS dataset or other cheminformatics/bioinformatics tasks.
-
-numpy: For numerical operations.
-
-pandas: For data manipulation and analysis.
-
-scikit-learn: For machine learning utilities and metrics.
-
-seaborn: For statistical data visualization.
-
-matplotlib: For plotting and visualization.
-
-rdkit: Essential for cheminformatics, handling SMILES strings, and generating molecular graphs.
-
-Other potentially used libraries based on notebook dependencies: transformers, accelerate, evaluate, fuzzywuzzy, huggingface_hub, etc.
-
-Files in this Repository
-document 17 (1).pdf: A detailed presentation or report outlining the theoretical background, methodology, and results of the project.
-
-DrugTargetIneraction (2).ipynb: The Jupyter Notebook containing the full code for data preprocessing, model implementation, training, evaluation, and visualization.
-
-(Add any other files you might have, e.g., requirements.txt, data/, models/)
-
-How to Run (Usage)
-To replicate and run this project:
-
-Clone the repository:
-
-Bash
-
-git clone <Your-Repository-URL>
+### 1. Clone the Repository
+```bash
+git clone <https://github.com/xPREMy/drugtargetinteraction>
 cd drug-target-interaction-prediction
-Create a virtual environment (recommended):
-
-Bash
-
-python -m venv venv
-source venv/bin/activate # On Windows, use `venv\Scripts\activate`
-Install the required libraries:
-
-Bash
-
-pip install torch_geometric PyTDC numpy pandas scikit-learn seaborn matplotlib rdkit # Add other specific libraries if necessary from your notebook's imports
-# Alternatively, if you have a requirements.txt file:
-# pip install -r requirements.txt
-Open and run the Jupyter Notebook:
-
-Bash
-
-jupyter notebook "DrugTargetIneraction (2).ipynb"
-Follow the steps within the notebook to load data, build and train the model, and evaluate its performance.
-
-Future Work
-Explore more advanced GNN architectures or attention mechanisms for improved feature learning.
-
-Incorporate additional molecular or protein features (e.g., physicochemical properties, structural motifs).
-
-Test the model on larger and more diverse datasets.
-
-Develop a user-friendly interface or API for new drug-target interaction predictions.
-
-Contact
-For any questions or collaborations, please reach out.
-(Add your contact information here, e.g., your LinkedIn profile URL, email address)
