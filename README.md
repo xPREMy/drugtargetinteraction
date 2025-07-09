@@ -74,8 +74,6 @@ We used the **DAVIS dataset**, a benchmark dataset for drug-target binding predi
 - `DrugTargetInteraction.ipynb` – Main notebook with full training pipeline
 - `document_17.pdf` – Report explaining architecture, results, and dataset
 - `requirements.txt` – Python dependencies *(recommended to add if missing)*
-- `data/` – Contains dataset files (optional)
-- `models/` – Trained model weights (optional)
 
 ---
 
