@@ -53,10 +53,6 @@ We used the **DAVIS dataset**, a benchmark dataset for drug-target binding predi
 |---------------------|-----------|
 | Training Accuracy   | 88.8%     |
 | Test Accuracy       | 87.8%     |
-| RMSE (Test)         | *Add Here* |
-| MAE (Test)          | *Add Here* |
-| Pearson Correlation | *Add Here* |
-
 > ⚠️ *Note: Accuracy is only meaningful if K<sub>d</sub> is binned into classes. Please include regression metrics if you're treating K<sub>d</sub> as continuous.*
 
 ---
